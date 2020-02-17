@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello MyBlog</title>
+  <title>Archives: 2020/2 | Hello MyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hello MyBlog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2020&#x2F;02&#x2F;index.html">
 <meta property="og:site_name" content="Hello MyBlog">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
@@ -151,137 +151,47 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-ajax的利用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/">ajax的利用</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/" class="archive-article-date">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/" class="archive-article-date">
   	<time datetime="2020-02-17T14:29:35.733Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ajax的利用"><a href="#ajax的利用" class="headerlink" title="ajax的利用"></a>ajax的利用</h1><h4 id="ajax是前端黑客攻击中常用的一种技术模式，其有三个特点，异步、javascript、xml"><a href="#ajax是前端黑客攻击中常用的一种技术模式，其有三个特点，异步、javascript、xml" class="headerlink" title="ajax是前端黑客攻击中常用的一种技术模式，其有三个特点，异步、javascript、xml"></a>ajax是前端黑客攻击中常用的一种技术模式，其有三个特点，异步、javascript、xml</h4><p><strong>其中异步</strong>，可以理解为另外开了一个线程，独立于浏览器主线程去做自己的事，这样浏览器不会因为等待ajax的进程而处于阻塞状态，所以利用ajax的攻击会显得无声无息。<br><br><strong>xml</strong>，在这里指的是数据传输格式是xml，但现在响应回的数据格式还可以是json、文本、html格式等<br><br><br><br><br>ajax的核心对象是xhr，不过在ie7之前的浏览器不支持xhr对象，而是通过ActiveXObject来实现的。ajax常用命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp=new XMLHttpRequest();//创建一个对象</span><br><span class="line">get请求</span><br><span class="line">xmlhttp.open(&quot;GET&quot;,&quot;/try/ajax/demo_get.php&quot;,true);</span><br><span class="line">xmlhttp.send();</span><br><span class="line">post请求</span><br><span class="line">xmlhttp.open(&quot;POST&quot;,&quot;/try/ajax/demo_post2.php&quot;,true);</span><br><span class="line">xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line">xmlhttp.send(&quot;fname=Henry&amp;lname=Ford）</span><br></pre></td></tr></table></figure>
-<p>但是值得注意的是，浏览器存在着同源策略。<br><br><strong>同源策略</strong>：是浏览器的一个安全功能，不同源的客户端脚本在没有明确授权的情况下不能读写对方的资源，只有在协议，主机名和端口号相同的情况下才可以允许访问。<br>但是可以在响应头中添加Header允许访问，这个跨域访问的解决方案的安全基础是JavaScript无法控制http头<br>可以在目标域返回的http头来授权是否允许跨域访问</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.addHeader(‘Access-Control-Allow-Origin:*’);</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux基础思维导图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/25/linux%E5%9F%BA%E7%A1%80%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/">linux基础思维导图</a>
+      <a class="archive-article-title" href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/">ajax的利用</a>
     </h1>
   
 
-        
-        <a href="/2019/10/25/linux%E5%9F%BA%E7%A1%80%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/" class="archive-article-date">
-  	<time datetime="2019-10-25T08:05:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#hello</p>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/25/linux%E5%9F%BA%E7%A1%80%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
+    </div></section>
+  
+
+    
 
 
           </div>
@@ -303,9 +213,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
