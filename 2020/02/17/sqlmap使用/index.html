@@ -6,13 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/2 | Hello MyBlog</title>
+  <title>sqlmap使用 | Hello MyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hello MyBlog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2020&#x2F;02&#x2F;index.html">
+  <meta name="description" content="sqlmap 使用规则sqlmap.py -u “链接” –dbs(查询数据库) sqlmap.py -u “链接” –current-db(查询当前使用的db) sqlmap.py -u “链接” -D 数据库 –tables(查询其数据库中的表)sqlmap.py -u “链接” -D 数据库 -T 表 –columns(查询该表的字段) sqlmap.py -u “链接” -D 数据库 -T">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlmap使用">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;17&#x2F;sqlmap%E4%BD%BF%E7%94%A8&#x2F;index.html">
 <meta property="og:site_name" content="Hello MyBlog">
+<meta property="og:description" content="sqlmap 使用规则sqlmap.py -u “链接” –dbs(查询数据库) sqlmap.py -u “链接” –current-db(查询当前使用的db) sqlmap.py -u “链接” -D 数据库 –tables(查询其数据库中的表)sqlmap.py -u “链接” -D 数据库 -T 表 –columns(查询该表的字段) sqlmap.py -u “链接” -D 数据库 -T">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-18T07:19:51.890Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hello MyBlog" type="application/atom+xml">
@@ -149,103 +152,167 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-sqlmap使用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      sqlmap使用
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/sqlmap%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+
+        
+        <a href="/2020/02/17/sqlmap%E4%BD%BF%E7%94%A8/" class="archive-article-date">
   	<time datetime="2020-02-17T14:31:33.930Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/sqlmap%E4%BD%BF%E7%94%A8/">sqlmap使用</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sqlmap 使用规则<br>sqlmap.py -u “链接” –dbs<br>(查询数据库)</p>
+<p>sqlmap.py -u “链接” –current-db<br>(查询当前使用的db)</p>
+<p>sqlmap.py -u “链接” -D 数据库 –tables<br>(查询其数据库中的表)<br>sqlmap.py -u “链接” -D 数据库 -T 表 –columns<br>(查询该表的字段)</p>
+<p>sqlmap.py -u “链接” -D 数据库 -T 表 -C<br>字段1，字段2 –dump<br>(查询该字段的数据)</p>
+<p>sqlmal.py –purge<br>（清除记录）</p>
+<p>sqlmap -v 参数<br>0 只显示python错误以及严重的信息<br>1 显示基本信息和警告信息（默认）<br>2 同时显示debug信息<br>3 同时显示playload 信息 显示如何注入<br>4 同时显示http请求<br>5 同时显示http响应头<br>6 同时显示http响应页面</p>
+<p>–technique=(BEUSTQ)<br>指定查询方式</p>
+<p>post 传值<br>sqlmap.py -r 文件 -p “指定注入点”<br>eg:sqlmap.py -r C:\Users\fifeng\Desktop\post.txt -p “User-Agent” –dbs -v3</p>
+<p>–level（进行相关检测）<br>2级 对header的cookie进行检测<br>3级 对header的refere进行检测<br>5级 对host进行检测</p>
+<p>-p指定注入点<br>level 与-p 互斥，-p的优先级更高</p>
+<p>批量检测<br>sqlmap.py -m 文件（存储了url的批量文件）</p>
+<p>查找相关链接的user 和password<br>sqlmap.py -u “链接” –users –passwords</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/17/sqlmap%E4%BD%BF%E7%94%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/mysql%20%E6%8B%BFshell%E5%8F%8A%E6%8F%90%E6%9D%83/" class="archive-article-date">
-  	<time datetime="2020-02-17T14:30:36.667Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/17/mysql%20%E6%8B%BFshell%E5%8F%8A%E6%8F%90%E6%9D%83/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql 拿shell及提权</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/mysql%20%E6%8B%BFshell%E5%8F%8A%E6%8F%90%E6%9D%83/">mysql 拿shell及提权</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-02-17T14:29:35.733Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/ajax%E7%9A%84%E5%88%A9%E7%94%A8/">ajax的利用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -268,8 +335,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
