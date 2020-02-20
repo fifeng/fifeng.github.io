@@ -151,6 +151,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux脏牛漏洞提权" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/20/linux%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/">linux脏牛漏洞提权</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/20/linux%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/" class="archive-article-date">
+  	<time datetime="2020-02-20T02:55:06.053Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="脏牛漏洞"><a href="#脏牛漏洞" class="headerlink" title="脏牛漏洞"></a>脏牛漏洞</h4><p>在2007年发布的linux内核版本中就已经存在此漏洞。漏洞范围为linux内核&gt;=2.6.22。该漏洞具体为，linux内核的内存子系统在处理写入时复制时产生了竞争条件。</p>
+<p><strong>方法一复现</strong><br></p>
+<ol>
+<li>下载exp1到目标机，<a href="https://github.com/FireFart/dirtycow" target="_blank" rel="noopener">下载链接</a> <br></li>
+<li>进入目录，使用 gcc -pthread dirty.c -o dirty -lcrypt 对dirty.c进行编译<br><img src="https://github.com/fifeng/fifeng.github.io/blob/master/2.png" alt="image"></li>
+<li>成功之后会生成dirty可执行文件，执行./dirty ‘密码’<br><img src="https://github.com/fifeng/fifeng.github.io/blob/master/3.png" alt="image"></li>
+<li>此时使用图片上的账号密码即可获得root权限</li>
+</ol>
+<p><strong>方法二复现</strong>(make后的gcc要较高版本才能成功)</p>
+<ol>
+<li>下载exp2到目标机，<a href="https://github.com/gbonacini/CVE-2016-5195" target="_blank" rel="noopener">链接</a></li>
+<li>解压进入文件夹，执行make后会生成dcow的可执行文件。</li>
+<li>执行 ./dcow -s 如果成功的话会返回一个root的shell,失败则返回false</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/20/linux%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux基础命令(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
